@@ -1,0 +1,57 @@
+// Bootstrap
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+
+
+/*ACF*/
+.acf-field-5ed77549450e8{
+	
+}
+.acf-field-5ed77561450e9{
+	display: none;
+}
+.acf-field-5ed7705947aee{
+	display: none;
+}
+.acf-field-5ed77578450ea{
+	display: none;
+}
+.acf-field-5ed7769c0e7a9{
+	display: none;
+}
+input.acf-button.button.button-primary.button-large {
+    display: none;
+}
+
+
+
+
+
+
+/*End-ACF*/
+
+
+
+.site-branding {
+    background-color: blue;
+}
+
+#site-navigation {
+    background-color: red;
+}
+
+main#primary {
+    background-color: mistyrose;
+}
+
+aside#secondary {
+    background-color: aquamarine;
+}
+
+.site-info {
+    background-color: antiquewhite;
+}
+
+img.custom-logo {
+    width: 100%;
+}

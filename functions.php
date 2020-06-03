@@ -139,6 +139,10 @@ function test_widgets_init() {
 }
 add_action( 'widgets_init', 'test_widgets_init' );
 
+
+
+
+
 /**
  * Enqueue scripts and styles.
  */
@@ -147,6 +151,9 @@ function test_scripts() {
 	wp_style_add_data( 'test-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'test-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+
+	wp_enqueue_script( 'app', get_template_directory_uri() . '/js/app.js', array(), _S_VERSION, true );
+
 
 	wp_enqueue_script( 'test-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), _S_VERSION, true );
 
@@ -183,3 +190,59 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+/**
+ACF form submission for newsletters
+*/
+add_action('acf/init', 'my_acf_form_init');
+function my_acf_form_init() {
+
+    // Check function exists.
+    if( function_exists('acf_register_form') ) {
+        // Register form.
+        acf_register_form(array(
+            'id'       => 'new-contact',
+            'post_id'  => 'new_post',
+            'new_post' => array(
+                'post_type'   => 'contact',
+                'post_status' => 'publish'
+            ),
+            'post_title'  => false,
+            'post_content'=> false
+        ));
+    }
+}
+
+/**
+How to change a title.
+*/
+function lh_acf_save_post( $post_id ) {
+
+    // Don't do this on the ACF post type
+    if ( get_post_type( $post_id ) == 'contacts' ) {
+        return;
+    }
+
+    $new_title_p1 = get_field( 'first_name', $post_id );
+    $new_title_p2 = get_field( 'last_name', $post_id );
+
+
+    // Prevent iInfinite looping...
+    remove_action( 'acf/save_post', 'lh_acf_save_post' );
+
+    // Grab post data
+    $post = array(
+        'ID'            => $post_id,
+        'post_title'    => $new_title_p1.' '.$new_title_p2,
+    );
+
+    // Update the Post
+    wp_update_post( $post );
+
+    // Continue save action
+    add_action( 'acf/save_post', 'lh_save_post' );
+
+    // Set the return URL in case of 'new' post
+    $_POST['return'] = add_query_arg( 'updated', 'true', get_permalink( $post_id ) );
+}
+add_action( 'acf/save_post', 'lh_acf_save_post', 10, 1 );
