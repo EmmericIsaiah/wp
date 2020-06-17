@@ -37,6 +37,11 @@ acf_form_head();
   		<div class="col-sm-4">
 			<!--Logo + Site title + Site description-->
 			<div class="site-branding">
+
+
+				<?php the_custom_logo(); ?>
+				
+				
 				<?php
 				if ( is_front_page() && is_home() ) :
 					?>
@@ -58,20 +63,27 @@ acf_form_head();
 		</div>
 
 		<div class="col-sm-8">
-			<!--  Mon menu  -->
-			<nav id="site-navigation" class="main-navigation">
-				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'test' ); ?></button>
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'menu-1',
-						'menu_id'        => 'primary-menu',
-					)
-				);
-				?>
-			</nav><!-- #site-navigation -->
+			<div id="menu-container">
+				<!--  Mon menu  -->
+				<div id="donut">
+							<div id="myButton" value="menu"/>
+								<div class="burgernhnai"></div>
+								<div class="burgernhnai"></div>
+								<div class="burgernhnai"></div>
+							</div>
+				</div>
+				<div class="nav-mobile" id="mobile">
+					<nav id="site-navigation" class="main-navigation" role="navigation">
+					            <button class="menu-toggle">Menu</button>
+					            <?php wp_nav_menu( array( 'theme_location' => 'menu-1', 'menu_class' => 'nav-menu' ) ); ?>
+					</nav>
+				</div>
+			
+
+			</div>
 		</div>
 
 	</div><!-- fermeture row -->
 
 	</header><!-- #masthead -->
+
