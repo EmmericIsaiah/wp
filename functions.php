@@ -244,4 +244,71 @@ function lh_acf_save_post( $post_id ) {
 }
 add_action( 'acf/save_post', 'lh_acf_save_post', 10, 1 );
 
+//Custom checkbox for home article wordpress
 
+/* Define the custom box */
+add_action( 'add_meta_boxes', 'wpse_61041_add_custom_box' );
+
+/* Do something with the data entered */
+add_action( 'save_post', 'wpse_61041_save_postdata' );
+
+/* Adds a box to the main column on the Post and Page edit screens */
+function wpse_61041_add_custom_box() {
+    add_meta_box( 
+        'wpse_61041_sectionid',
+        'Article template',
+        'wpse_61041_inner_custom_box',
+        'post',
+        'side',
+        'high'
+    );
+}
+
+/* Prints the box content */
+function wpse_61041_inner_custom_box($post)
+{
+    // Use nonce for verification
+    wp_nonce_field( 'wpse_61041_wpse_61041_field_nonce', 'wpse_61041_noncename' );
+
+    // Get saved value, if none exists, "default" is selected
+    $saved = get_post_meta( $post->ID, 'article_type', true);
+    if( !$saved )
+        $saved = 'default';
+
+    $fields = array(
+        'imagetext'       => __('Image & text', 'wpse'),
+        'text'     => __('Text', 'wpse'),
+        'image'      => __('Image', 'wpse'),
+        'default'   => __('Default', 'wpse'),
+    );
+
+    foreach($fields as $key => $label)
+    {
+        printf(
+            '<input type="radio" name="article_type" value="%1$s" id="article_type[%1$s]" %3$s />'.
+            '<label for="article_type[%1$s]"> %2$s ' .
+            '</label><br>',
+            esc_attr($key),
+            esc_html($label),
+            checked($saved, $key, false)
+        );
+    }
+}
+
+/* When the post is saved, saves our custom data */
+function wpse_61041_save_postdata( $post_id ) 
+{
+      // verify if this is an auto save routine. 
+      // If it is our form has not been submitted, so we dont want to do anything
+      if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
+          return;
+
+      // verify this came from the our screen and with proper authorization,
+      // because save_post can be triggered at other times
+      if ( !wp_verify_nonce( $_POST['wpse_61041_noncename'], 'wpse_61041_wpse_61041_field_nonce' ) )
+          return;
+
+      if ( isset($_POST['article_type']) && $_POST['article_type'] != "" ){
+            update_post_meta( $post_id, 'article_type', $_POST['article_type'] );
+      } 
+}

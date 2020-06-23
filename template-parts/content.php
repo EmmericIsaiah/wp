@@ -9,7 +9,11 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php $article_type = get_post_meta( get_the_ID(), 'article_type', true); ?>
+
+
+<article class="home-article hvr-buzz <?php echo esc_attr($article_type); ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
@@ -25,9 +29,10 @@
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
+	
+		<?php the_post_thumbnail(); ?>
+		<?php the_excerpt(); ?>
 
-	<?php test_post_thumbnail(); ?>
-	<?php the_excerpt(); ?>
 
 	<div class="entry-content">
 		

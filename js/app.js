@@ -49,20 +49,12 @@ jQuery(document).ready(function ($) {
          container.masonry();
     });
 
-    // This will fire when document is ready:
-    $(window).resize(function() {
-        // This will fire each time the window is resized:
-        if($(window).width() <= 800) { //C'est ici pour fa ire disparaître le menu down en dessus de 800px de large
-                jQuery('li.menu-item-has-children>ul').prepend('<button  class="submenu-button">DOWN</button>');
+                jQuery('ul#menu-menu-1 li.menu-item-has-children>ul').prepend('<button  class="submenu-button">DOWN</button>');
                 jQuery('.submenu-button').siblings().hide();
-                jQuery('.submenu-button').click( function(){
-                jQuery(this).siblings().toggle();
-        } );
-
-        } else {
                 console.log('test');
-        }
-    }).resize(); // This will simulate a resize to trigger the initial run.
-
+                jQuery('.submenu-button').click( function(){//crée une classe submenu-button 
+                jQuery(this).siblings().toggle();
+                 } );
 
 });
+

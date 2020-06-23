@@ -1,6 +1,7 @@
 // Bootstrap
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import url(https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700&display=swap);
+@import 'node_modules/hover.css/scss/hover';
 
 // Color Variables
 $color1-main: #ab394a;
@@ -8,10 +9,11 @@ $color2-secondary: #eeeeee;
 $color3-hover: #c6e4ce;
 // Font Variables
 $main-font: 'Nunito';
+
 //Ici, il faut aussi variabiliser la graisse de police
 
 // General styling
-h2.entry-title {
+/*h2.entry-title {
     font-family: $main-font;
     font-weight: 700;
     padding: 1em;
@@ -24,7 +26,7 @@ h2.entry-title {
 
     	}
     }
-}
+}*/
 
 p {
 	font-family: $main-font;
@@ -213,7 +215,23 @@ div#menu-container {
      
     }
 
+
+
+
 /* Home */
+
+article.home-article {
+  &.text {
+  	img {
+  		display:none;
+  	}
+  }
+  &.image {
+  	p {
+  		display: none;
+  	}
+  }
+}
 
 
 /*Logo*/
@@ -272,7 +290,7 @@ section.widget {
 
 //End sidebar
 
-section#grid-container article {
+section#grid-container article.home-article {
     width: 30%;
     margin-left: 2em;
     margin-top: 2em;
@@ -289,7 +307,7 @@ section#grid-container article {
 //Grid Responsive
 
 @media screen and (max-width: 1293px) {
-	section#grid-container article {
+	section#grid-container article.home-article {
 	width: 30%;
     margin-left: 1em;
     margin-top: 1em;
@@ -298,14 +316,22 @@ section#grid-container article {
 }
 
 @media screen and (max-width: 868px) {
-	section#grid-container article {
+	section#grid-container article.home-article {
 		width: 100%;
 		margin-left: 1em;
    		margin-top: 1em;
    		margin-right: 1em;
 	}
+	#navdesktop {
+		display: none;
+	}
 }
 
+@media screen and (min-width: 868px) {
+	#navmobile {
+		display: none;
+	}
+}
 
 
 

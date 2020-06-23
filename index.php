@@ -23,8 +23,6 @@ get_header();
 				
 
 				<section id="grid-container" class="transitions-enabled fluid masonry js-masonry grid">
-					
-		
 							<?php
 							if ( have_posts() ) :
 
@@ -61,8 +59,6 @@ get_header();
 
 							endif;
 							?>
-
-	
 				</section>
 
 					
