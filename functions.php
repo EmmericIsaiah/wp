@@ -312,3 +312,43 @@ function wpse_61041_save_postdata( $post_id )
             update_post_meta( $post_id, 'article_type', $_POST['article_type'] );
       } 
 }
+
+
+//Custom post types for notifications
+
+// Our custom post type function
+function create_posttype() {
+ 
+    register_post_type( 'notifications',
+    // CPT Options
+        array(
+            'labels' => array(
+                'name' => __( 'Notifications' ),
+                'singular_name' => __( 'Notifications' )
+            ),
+            'public' => true,
+            'has_archive' => false,
+            'rewrite' => array('slug' => 'movies'),
+            'show_in_rest' => true,
+ 
+        )
+    );
+}
+// Hooking up our function to theme setup
+add_action( 'init', 'create_posttype' );
+
+add_filter('use_block_editor_for_post_type', 'prefix_disable_gutenberg', 10, 2);
+function prefix_disable_gutenberg($current_status, $post_type)
+{
+    // Use your post type key instead of 'product'
+    if ($post_type === 'notifications') return false;
+    return $current_status;
+}
+
+//---------------------------------------------------------------------
+
+
+function HelloWorldShortcode() {
+	return '<p>Hello World!</p>';
+}
+add_shortcode('helloworld', 'HelloWorldShortcode');

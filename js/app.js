@@ -51,10 +51,15 @@ jQuery(document).ready(function ($) {
 
                 jQuery('ul#menu-menu-1 li.menu-item-has-children>ul').prepend('<button  class="submenu-button">DOWN</button>');
                 jQuery('.submenu-button').siblings().hide();
-                console.log('test');
                 jQuery('.submenu-button').click( function(){//crée une classe submenu-button 
                 jQuery(this).siblings().toggle();
                  } );
 
 });
 
+
+//Notifications bar
+
+jQuery(".closing-notification").click(function($){
+  jQuery(".notification-bar").fadeOut();
+});

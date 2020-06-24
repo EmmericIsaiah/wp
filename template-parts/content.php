@@ -12,15 +12,17 @@
 <?php $article_type = get_post_meta( get_the_ID(), 'article_type', true); ?>
 
 
-<article class="home-article hvr-buzz <?php echo esc_attr($article_type); ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article class="home-article hvr-bounce-to-right <?php echo esc_attr($article_type); ?>" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+<a href="<?php the_permalink() ?>" id="home-article-permalink">	
 
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
+		else :?>
+			<h2 class="entry-title"><?php the_title() ?></h2>
+		<?php endif;
 
 		if ( 'post' === get_post_type() ) :
 			?>
@@ -30,15 +32,14 @@
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 	
-		<?php the_post_thumbnail(); ?>
-		<?php the_excerpt(); ?>
 
 
 	<div class="entry-content">
-		
+		<?php the_post_thumbnail(); ?>
+		<?php the_excerpt(); ?>
+
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
+	</a>
 
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
