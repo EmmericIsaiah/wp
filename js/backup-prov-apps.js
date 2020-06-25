@@ -38,11 +38,10 @@ jQuery(document).ready(function($) {
 });
 
 
-
-
 jQuery(document).ready(function ($) {
     // with jQuery
     var container = jQuery('#grid-container');
+    const backup_menu_item = jQuery('.menu-item-has-children').clone();
 
     // initialize Masonry after all images have loaded
     container.imagesLoaded( function() {
@@ -52,17 +51,18 @@ jQuery(document).ready(function ($) {
     // This will fire when document is ready:
     $(window).resize(function() {
         // This will fire each time the window is resized:
-        if($(window).width() <= 800) { //C'est ici pour fa ire disparaître le menu down en dessus de 800px de large
+        if($(window).width() <= 800 ) { //C'est ici pour fa ire disparaître le menu down en dessus de 800px de large
             jQuery('li.menu-item-has-children>ul').prepend('<button  class="submenu-button">DOWN</button>');
             jQuery('.submenu-button').siblings().hide();
             jQuery('.submenu-button').click( function(){
                 jQuery(this).siblings().toggle();
-            } );
-
-        } else {
-            console.log('test');
+            });
+            jQuery('.menu-item-has-children').remove();
+        }
+        else {
+            jQuery('.menu-item-has-children').replaceWith(backup_menu_item) ;
+            jQuery('.submenu-button').siblings().show();
         }
     }).resize(); // This will simulate a resize to trigger the initial run.
-
 
 });
