@@ -20,11 +20,9 @@ get_header();
 	<div class="row">
 		<div class="col-sm-9">
 			<main id="primary" class="site-main">
-
+				
 
 				<section id="grid-container" class="transitions-enabled fluid masonry js-masonry grid">
-
-
 							<?php
 							if ( have_posts() ) :
 
@@ -51,7 +49,7 @@ get_header();
 
 							?>
 
-
+							
 							<?php
 								the_posts_navigation();
 
@@ -61,12 +59,10 @@ get_header();
 
 							endif;
 							?>
-
-
 				</section>
 
-
-
+					
+				
 
 
 
@@ -76,14 +72,11 @@ get_header();
 
 
 
-		<div class="col-sm-12 col-md-12 col-xl-3">
+		<div class="col-sm-3">
 			<?php
 			get_sidebar(); ?>
 		</div>
 	</div>
-
-
-
 
 <?php
 get_footer();
